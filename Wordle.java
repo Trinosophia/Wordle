@@ -1,6 +1,5 @@
 import java.util.*;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -16,11 +15,10 @@ public class Wordle {
     public static void main(String[] args) {
         Scanner kb = new Scanner(System.in);
         String guess = "", wordList = "wordList2.txt";
-        boolean cont = true;
         wordListArr = readFile(wordList, wordListArr);
         String solutionWord = randomWord(wordListArr);
-        System.out.println(solutionWord);
         createBoard(board);
+        artTitle();
 
         System.out.println("Enter your first guess to start: ");
             try {
@@ -42,6 +40,7 @@ public class Wordle {
                     } else if (i == 5 && checkWin(hints, 5) == false) {
                         displayBoard(board, i);
                         System.out.println("Sorry, that was your last guess. You lose!");
+                        System.out.println("The correct word was: " + solutionWord.toUpperCase());
                         System.out.println();
                         break;
                     } else
@@ -52,6 +51,7 @@ public class Wordle {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Please make sure you're entering a 5-letter word.");
             }
+            kb.close();
     }
 
     public static ArrayList<String> readFile(String file, ArrayList<String> wordListArr) {
@@ -153,5 +153,18 @@ public class Wordle {
             }
         }
         return false;
+    }
+
+    public static void artTitle(){
+        System.out.println("                     _________________________________________                         ");
+        System.out.println("   ___              /  ____________________________________   |                        ");
+        System.out.println("   \\  \\            /  / ________    ________    _______    |  |        ________                            ");
+        System.out.println("    \\  \\    /\\    /  / |   __   |  |   _    |  |   _   \\   |  |       |   _____|              ");
+        System.out.println("     \\  \\  /  \\  /  /  |  |  |  |  |  |_|   |  |  | \\   \\  |  |       |  |___                       ");
+        System.out.println("      \\  \\/    \\/  /   |  |  |  |  |   _   _|  |  |  |   | |  |       |   ___|               ");
+        System.out.println("       \\    /\\    /    |  |__|  |  |  | \\  \\   |  |_/   /  |  |_____  |  |_____                            ");
+        System.out.println("        \\__/  \\__/     |________|  |__|  \\__\\  |_______/   |________| |________|                                              "); 
+        System.out.println("        Six tries until victory. Six tries until failure. Can you guess the word?");
+        System.out.println();
     }
 }
